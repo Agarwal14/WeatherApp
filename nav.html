@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet1" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css"> -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!-- <link rel="stylesheet" href="app.css"> -->
+</head>
+<style>
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800,900");
+@import url("https://cdn.linearicons.com/free/1.0.0/icon-font.min.css");
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: #112233;
+}
+
+.weather-card {
+  margin: 10px auto;
+  height: 740px;
+  width: 450px;
+  background: #fff;
+  box-shadow: 0 1px 38px rgba(0, 0, 0, 0.15), 0 5px 12px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+.weather-card .top {
+  position: relative;
+  height: 220px;
+  width: 100%;
+  overflow: hidden;
+  background: url("https://s-media-cache-ak0.pinimg.com/564x/cf/1e/c4/cf1ec4b0c96e59657a46867a91bb0d1e.jpg") no-repeat;
+  background-size: cover;
+  background-position: center center;
+  text-align: center;
+}
+.weather-card .top .wrapper {
+  padding: 30px;
+  position: relative;
+  z-index: 1;
+}
+.weather-card .top .wrapper .mynav {
+  height: 20px;
+}
+.weather-card .top .wrapper .mynav .lnr {
+  color: #fff;
+  font-size: 20px;
+}
+.weather-card .top .wrapper .mynav .lnr-chevron-left {
+  display: inline-block;
+  float: left;
+}
+.weather-card .top .wrapper .mynav .lnr-cog {
+  display: inline-block;
+  float: right;
+}
+.weather-card .top .wrapper .heading {
+  margin-top: 20px;
+  font-size: 35px;
+  font-weight: 400;
+  color: #fff;
+}
+.weather-card .top .wrapper .location {
+  margin-top: 20px;
+  font-size: 21px;
+  font-weight: 400;
+  color: #fff;
+}
+/* .weather-card .top .wrapper .temp {
+  margin-top: 10px; 
+}*/
+.weather-card .top .wrapper .temp a {
+  text-decoration: none;
+  color: #fff;
+}
+.weather-card .top .wrapper .temp a .temp-type {
+  font-size: 55px;
+}
+.weather-card .top .wrapper .temp .temp-value {
+  display: inline-block;
+  font-size: 55px;
+  font-weight: 600;
+  color: #fff;
+}
+.weather-card .top .wrapper .temp .deg {
+  display: inline-block;
+  font-size: 19px;
+  font-weight: 600;
+  color: #fff;
+  vertical-align: top;
+  margin-top: 10px;
+}
+.weather-card .top:after {
+  content: "";
+  height: 100%;
+  width: 100%;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+.weather-card .bottom {
+
+  padding: 0 30px;
+  background: #fff;
+}
+.weather-card .bottom .wrapper .forecast {
+  overflow: hidden;
+  margin: 0;
+  font-size: 0;
+  padding: 0;
+  padding-top: 20px;
+  /* max-height: 155px; */
+}
+.weather-card .bottom .wrapper .forecast a {
+  text-decoration: none;
+  color: #000;
+}
+.weather-card .bottom .wrapper .forecast .go-down {
+  text-align: center;
+  display: block;
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+.weather-card .bottom .wrapper .forecast li {
+  display: block;
+  font-size: 25px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.25);
+  line-height: 1em;
+  margin-bottom: 30px;
+}
+.weather-card .bottom .wrapper .forecast li .date {
+  display: inline-block;
+}
+.weather-card .bottom .wrapper .forecast li .condition {
+  display: inline-block;
+  vertical-align: middle;
+  float: right;
+  font-size: 25px;
+}
+.weather-card .bottom .wrapper .forecast li .condition .temp {
+  display: inline-block;
+  vertical-align: top;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  padding-top: 2px;
+}
+.weather-card .bottom .wrapper .forecast li .condition .temp .deg {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  margin-left: 3px;
+  vertical-align: top;
+}
+.weather-card .bottom .wrapper .forecast li .condition .temp .temp-type {
+  font-size: 20px;
+}
+.weather-card .bottom .wrapper .forecast li.active {
+  color: rgba(0, 0, 0, 0.8);
+}
+.weather-card.rain .top {
+  background: url("http://img.freepik.com/free-vector/girl-with-umbrella_1325-5.jpg?size=338&ext=jpg") no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+</style>
+<body >
+
+    <!------ Include the above in your HEAD tag ---------->
+    
+    <div class="container">
+        <div style="padding-left: 25%; color: white;">
+        <h1 class="heading_" style="padding-top: 2px; color: white;">Check the weather forecast</h1>
+        <form action="/" method="post" style="padding-left: 15%;">
+                         
+            <!-- <label for="cityInput" style="display: block; "><h3>Enter city name</h3> </label> -->
+          <input type="text" name="cityName" id="cityInput">
+          <button type="submit">Check</button>
+        </form>
+    </div>
+        <div class="row">
+           
+            <div class="col">
+                
+                <div class="weather-card one" >
+                    <div class="top" id="bg_img">
+                        
+      
+              
+                       
+                        <div class="wrapper">
+                           
+                            
+                            <div class="mynav">
+                                <a href="/"><span class="lnr lnr-chevron-left"></span></a>
+                                <!-- <a href="setting"><span class="lnr lnr-cog"></span></a> -->
+                            </div>
+                            
+                            <p class="temp">
+                                <span class="temp-value">{%tempval%}</span>
+                                <span class="deg">0</span>
+                                <a href="javascript:;"><span class="temp-type">C</span></a>
+                            </p>
+                            <h2 class="heading" id="stat">{%tempstatus%}</h2>
+                            <h3 class="location" style="font-size:x-large;">Delhi, India</h3>
+                            <p id="date_" style="color: white ; font-size: large;">WED | OCT 23 | 10:49 AM</p>
+                            
+                        </div>
+                    </div>
+                    <div class="bottom" >
+                        <div class="wrapper">
+                            <ul class="forecast">
+                                <a href="/"><span class="lnr lnr-chevron-down go-down"></span></a>
+                                <li class="active">
+                                    <span class="date">Feels like: </span>
+                                    <span class="lnr lnr-sun condition">
+                                        <span class="temp">{%feel_like%}<span class="deg">0</span><span class="temp-type">C</span></span>
+                                    </span>
+                                </li>
+                                <li class="active">
+                                    <span class="date">Max:</span>
+                                    <span class="lnr lnr-sun condition">
+                                        <span class="temp">{%tempmax%}<span class="deg">0</span><span class="temp-type">C</span></span>
+                                    </span>
+                                </li>
+                                <li class="active">
+                                    <span class="date">Min:</span>
+                                    
+                                    <span class="lnr lnr-cloud condition">
+                                        <span class="temp">{%tempmin%}<span class="deg">0</span><span class="temp-type">C</span>
+                                    </span>
+                                    </span>
+                                </li>
+                                <li class="active">
+                                    <span class="date">Pressure:</span>
+                                    <span class="lnr lnr-cloud condition">
+                                        <span class="temp">{%pressure%}</span>
+                                    </span>
+                                </li>
+                                <li class="active">
+                                    <span class="date">Humidity:</span>
+                                    <span class="lnr lnr-drop condition">
+                                    <!-- <span class="lnr lnr-cloud condition"> -->
+                                        <span class="temp">{%humidity%}</span>
+                                    </span>
+                                </li>
+                                <li class="active">
+                                    <span class="date">Wind speed:</span>
+                                    <span class="lnr lnr-sync condition">
+                                        <span class="temp">{%wind_speed%}</span>
+                                    </span>
+                                </li>
+                                <li class="active">
+                                    <span class="date">Visibility</span>
+                                    <span class="lnr lnr-cloud condition">
+                                        <span class="temp">{%visibility%}</span>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+    </div>
+    <script >
+        let curDate = document.getElementById("date_");
+        let weatherCon = document.getElementById("bg_img");
+      
+    
+        const getCurrentDay = () =>{
+          var weekday = new Array(7);
+          weekday[0]="Sunday";
+          weekday[1]="Monday";
+          weekday[2]="Tuesday";
+          weekday[3]="Wednesday";
+          weekday[4]="Thursday";
+          weekday[5]="Friday";
+          weekday[6]="Saturday";
+  
+          let currentTime = new Date();
+          console.log(weekday[currentTime.getDay()]);
+          let day = weekday[currentTime.getDay()];
+          return day;
+        };
+        const getCurrentTime = () =>{
+          var months = new Array(12);
+          months[0]="January";
+          months[1]="February";
+          months[2]="March";
+          months[3]="April";
+          months[4]="May";
+          months[5]="June";
+          months[6]="July";
+          months[7]="August";
+          months[8]="September";
+          months[9]="October";
+          months[10]="November";
+          months[11]="December";
+  
+          var now = new Date();
+          var month = now.getMonth() ;
+          var day = now.getDate();
+          var year = now.getFullYear();
+  
+          let hrs = now.getHours();
+          let mins = now.getMinutes();
+          let periods = "AM";
+          if(hrs > 11){
+            periods = "PM";
+            if(hrs > 12){
+              hrs-=12;
+            }
+          }
+          if(mins < 10){
+            mins = "0" + mins;
+          }
+          
+          console.log(day+" "+months[month]+" "+hrs+":"+mins+periods);
+          return `${months[month]} ${day} | ${hrs}:${mins} ${periods}`;
+         
+        }
+       
+        curDate.innerHTML = getCurrentDay()+" | " + getCurrentTime();
+        
+        let tempStatus =document.getElementById("stat").innerHTML;
+        
+       if(tempStatus=="Clouds"){
+        weatherCon.style.backgroundImage="url('https://img.freepik.com/free-vector/evening-cloudy-sky-purple-background-with-group-cumulus-cirrus-clouds-flat-cartoon-illustration_1284-62768.jpg?size=626&ext=jpg&uid=R106997218&ga=GA1.2.822414132.1676314578')";
+       }
+       if(tempStatus=="Rain"){
+          weatherCon.style.backgroundImage="url('https://img.freepik.com/free-vector/realistic-with-falling-rain-drops-ripples-water-vector-illustration_1284-30900.jpg?size=626&ext=jpg&uid=R106997218&ga=GA1.2.822414132.1676314578&semt=sph')";
+       }
+       if(tempStatus=="Haze"){
+        weatherCon.style.backgroundImage="url('https://img.freepik.com/free-vector/evening-fog-tops-trees-pine-forest_1284-27059.jpg?size=626&ext=jpg&uid=R106997218&ga=GA1.2.822414132.1676314578&semt=sph')";
+       }
+      </script>
+</body>
+</html>
